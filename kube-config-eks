@@ -1,0 +1,24 @@
+apiVersion: v1
+clusters:
+- cluster:
+    server: add the server url
+    certificate-authority-data: add data wich is available in eks service
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: aws
+  name: aws
+current-context: aws
+kind: config
+preferences: {}
+users:
+  - name: aws
+    user:
+      exec:
+        apiVersion:client.authentication.k8s.io/vlalpha1
+        command: aws-iam-authenticator
+        args:
+          - "token"
+          - "-i"
+          - "eks-cluster"
